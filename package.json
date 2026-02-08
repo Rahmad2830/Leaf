@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "esbuild": "^0.27.3"
+  },
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --minify --format=esm --outfile=dist/Leaf.min.js"
+  }
+}
