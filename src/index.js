@@ -23,6 +23,30 @@ function scheduleFlush() {
   })
 }
 
+function createTargets(node) {
+  const single = new Proxy({}, {
+    get: (_, name) => {
+      return node.querySelector(
+        `[data-target="${String(name)}"]`
+      )
+    }
+  })
+  const multiple = new Proxy({}, {
+    get: (_, name) => {
+      return node.querySelectorAll(
+        `[data-target="${String(name)}"]`
+      )
+    }
+  })
+  
+  return new Proxy({}, {
+    get: (_, name) => {
+      if (name === "all") return multiple
+      return single[name]
+    }
+  })
+}
+
 function manageLifecycle(node, actions) {
   const scopeName = node.dataset.scope
   const setup = registry[scopeName]
@@ -37,9 +61,7 @@ function manageLifecycle(node, actions) {
       controller = setup({
         root: node,
         targets: new Proxy({}, {
-          get: (_, name) => name.endsWith("s") ?
-            node.querySelectorAll(`[data-target="${name}"]`) :
-            node.querySelector(`[data-target="${name}"]`)
+          get: (_, name) => createTargets(node)
         }),
         values: new Proxy({}, {
           get: (_, name) => node.dataset[name],
