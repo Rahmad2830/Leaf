@@ -103,7 +103,7 @@ function init() {
   observer.observe(document.body, { childList: true, subtree: true })
   document.querySelectorAll("[data-scope]").forEach(el => manageLifecycle(el, "connect"))
   
-  const Events = ["click", "submit", "input", "change"]
+  const Events = ["click", "submit", "input", "change", "focus", "blur", "keydown", "pointerdown"]
   Events.forEach(type => {
     document.addEventListener(type, (e) => {
       const el = e.target.closest(`[data-action*="${type}->"]`)
