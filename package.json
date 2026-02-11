@@ -1,8 +1,11 @@
 {
   "devDependencies": {
-    "esbuild": "^0.27.3"
+    "esbuild": "^0.27.3",
+    "jsdom": "^28.0.0",
+    "vitest": "^4.0.18"
   },
   "scripts": {
-    "build": "esbuild src/index.js --bundle --minify --format=esm --outfile=dist/Leaf.min.js"
+    "build": "esbuild src/index.js --bundle --minify --format=esm --outfile=dist/Leaf.min.js",
+    "test": "vitest"
   }
 }

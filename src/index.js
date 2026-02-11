@@ -14,9 +14,11 @@ function scheduleFlush() {
   
   queueMicrotask(() => {
     schedule = false
-    disconnectQueue.forEach(node => manageLifecycle(node, "disconnect"))
+    disconnectQueue.forEach(node => {
+      if (!node.isConnected) manageLifecycle(node, "disconnect")
+    })
     connectQueue.forEach(node => {
-      if(!disconnectQueue.has(node)) manageLifecycle(node, "connect")
+      if (node.isConnected) manageLifecycle(node, "connect")
     })
     connectQueue.clear()
     disconnectQueue.clear()
@@ -60,9 +62,7 @@ function manageLifecycle(node, actions) {
     if(!controller) {
       controller = setup({
         root: node,
-        targets: new Proxy({}, {
-          get: (_, name) => createTargets(node)
-        }),
+        targets: createTargets(node),
         values: new Proxy({}, {
           get: (_, name) => node.dataset[name],
           set: (_, name, value) => {
@@ -77,8 +77,8 @@ function manageLifecycle(node, actions) {
   } else if(actions === "disconnect" && controller) {
     if(typeof controller.disconnect === "function") {
       controller.disconnect()
-      instance.delete(node)
     }
+    instance.delete(node)
   }
 }
 
@@ -136,6 +136,12 @@ function init() {
   })
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  init()
-})
+function start() {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init)
+  } else {
+    init()
+  }
+}
+
+start()
