@@ -27,18 +27,10 @@ function scheduleFlush() {
 
 function createTargets(node) {
   const single = new Proxy({}, {
-    get: (_, name) => {
-      return node.querySelector(
-        `[data-target="${String(name)}"]`
-      )
-    }
+    get: (_, name) => node.querySelector(`[data-target="${String(name)}"]`)
   })
   const multiple = new Proxy({}, {
-    get: (_, name) => {
-      return node.querySelectorAll(
-        `[data-target="${String(name)}"]`
-      )
-    }
+    get: (_, name) => node.querySelectorAll(`[data-target="${String(name)}"]`)
   })
   
   return new Proxy({}, {
