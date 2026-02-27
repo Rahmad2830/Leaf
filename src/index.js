@@ -51,21 +51,23 @@ function manageLifecycle(node, actions) {
   
   let controller = instance.get(node)
   if(actions === "connect") {
-    if(!controller) {
-      controller = setup({
-        root: node,
-        targets: createTargets(node),
-        values: new Proxy({}, {
-          get: (_, name) => node.dataset[name],
-          set: (_, name, value) => {
-            node.dataset[name] = value
-            return true
-          }
-        })
+    controller = setup({
+      root: node,
+      targets: createTargets(node),
+      values: new Proxy({}, {
+        get: (_, name) => node.dataset[name],
+        set: (_, name, value) => {
+          node.dataset[name] = value
+          return true
+        }
       })
-      instance.set(node, controller)
-      if(typeof controller.connect === "function") controller.connect()
+    })
+    if(!controller) {
+      console.error(`[Leaf.js] Scope "${scopeName}" does not return an object. Make sure there is a "return {}" at the end`)
+      return
     }
+    instance.set(node, controller)
+    if(typeof controller.connect === "function") controller.connect()
   } else if(actions === "disconnect" && controller) {
     if(typeof controller.disconnect === "function") {
       controller.disconnect()
