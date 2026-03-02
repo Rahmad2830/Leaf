@@ -19,7 +19,7 @@ For full guides, examples, and API reference, visit the official documentation:
 
 **☕ Buy me a Coffee**
 
-Please support me in developing this library. I really appreciate your support. Thank you.
+I really appreciate your support. Thank you.
 
 <a href="https://ko-fi.com/rahmatnurhidayat">
   <img src="assets/support_me_on_kofi_beige.png" width="250" alt="Support-me" />
