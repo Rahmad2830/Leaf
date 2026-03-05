@@ -9,7 +9,7 @@
 ![Dependency](https://img.shields.io/badge/Dependency_Count-0-brightgreen?style=for-the-badge)
 ![Size](https://img.shields.io/badge/Size-<1kb_Gzip-brightgreen?style=for-the-badge)
 
-Leaf.js is a lightweight JavaScript library for building reactive UI components directly in HTML using data attributes. It enables dynamic behavior through a simple scope-based architecture — no build tools, no bundler, no complex setup required.
+Leaf.js is a lightweight JavaScript library for building UI components directly in HTML using data attributes. It enables dynamic behavior through a simple scope-based architecture — no build tools, no bundler, no complex setup required.
 
 **✨ Key Features**
 - Scope-based component system
