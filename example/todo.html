@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+  </head>
+  <body>
+    <div data-scope="todo">
+
+      <form data-action="submit->add">
+        <input data-target="input" placeholder="Add todo">
+        <button>Add</button>
+      </form>
+    
+      <ul data-target="list"></ul>
+    
+    </div>
+    
+    <script type="module">
+    import { defineScope } from "https://cdn.jsdelivr.net/gh/Rahmad2830/Leaf@v1.0.1/dist/Leaf.min.js"
+    
+    defineScope("todo", ({ targets }) => {
+      return {
+        add({ event }){
+          event.preventDefault()
+          const text = targets.input.value
+          if(!text) return
+          
+          const li = document.createElement("li")
+          li.textContent = text
+          targets.list.appendChild(li)
+          targets.input.value = ""
+        }
+      }
+    })
+    </script>
+  </body>
+</html>

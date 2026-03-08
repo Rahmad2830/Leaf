@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Values</title>
+  </head>
+  <body>
+    <div data-scope="timer" data-time="0">
+
+      <p data-target="display">0</p>
+    
+      <button data-action="click->start">
+        Start
+      </button>
+    
+    </div>
+    
+    <script type="module">
+    import { defineScope } from "https://cdn.jsdelivr.net/gh/Rahmad2830/Leaf@v1.0.1/dist/Leaf.min.js"
+    
+    defineScope("timer", ({ targets, values }) => {
+      let interval
+      function render(){
+        targets.display.textContent = values.time
+      }
+      
+      return {
+        start(){
+          clearInterval(interval)
+          interval = setInterval(()=>{
+            values.time = Number(values.time) + 1
+            render()
+          },1000)
+        }
+      }
+    })
+    </script>
+  </body>
+</html>

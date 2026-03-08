@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle</title>
+  </head>
+  <body>
+    <div data-scope="toggle">
+      <button data-action="click->toggle">
+        Toggle Text
+      </button>
+    
+      <p data-target="text">
+        Hello Leaf.js
+      </p>
+    </div>
+    
+    <script type="module">
+    import { defineScope } from "https://cdn.jsdelivr.net/gh/Rahmad2830/Leaf@v1.0.1/dist/Leaf.min.js"
+    
+    defineScope("toggle", ({ targets }) => {
+      return {
+        toggle(){
+          targets.text.hidden = !targets.text.hidden
+        }
+      }
+    })
+    </script>
+  </body>
+</html>

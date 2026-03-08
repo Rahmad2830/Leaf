@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Params</title>
+  </head>
+  <body>
+    <div data-scope="cart">
+
+      <button
+        data-action="click->add"
+        data-id="1"
+        data-name="Apple"
+      >
+        Add Apple
+      </button>
+    
+      <button
+        data-action="click->add"
+        data-id="2"
+        data-name="Orange"
+      >
+        Add Orange
+      </button>
+    
+    </div>
+    
+    <p>Look at console</p>
+    
+    <script type="module">
+    import { defineScope } from "https://cdn.jsdelivr.net/gh/Rahmad2830/Leaf@v1.0.1/dist/Leaf.min.js"
+    
+    defineScope("cart", () => {
+    
+      return {
+        add({ params }){
+          console.log("Add item:", params.id, params.name)
+        }
+      }
+    })
+    </script>
+  </body>
+</html>

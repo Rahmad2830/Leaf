@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+  </head>
+  <body>
+    <div data-scope="counter">
+      <h2 data-target="count">0</h2>
+    
+      <button data-action="click->increment">
+        +
+      </button>
+    
+      <button data-action="click->decrement">
+        -
+      </button>
+    </div>
+    
+    <script type="module">
+    import { defineScope } from "https://cdn.jsdelivr.net/gh/Rahmad2830/Leaf@v1.0.1/dist/Leaf.min.js"
+    
+    defineScope("counter", ({ targets }) => {
+      let count = 0
+      function render(){
+        targets.count.textContent = count
+      }
+      
+      return {
+        increment(){
+          count++
+          render()
+        },
+        decrement(){
+          count--
+          render()
+        }
+      }
+    })
+    </script>
+  </body>
+</html>
