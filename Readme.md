@@ -65,7 +65,7 @@ defineScope("anyScope", () => {
 
 For full guides, examples, and API reference, visit the official documentation:
 
-👉 https://withcable.pages.dev
+👉 https://withcable.web.id
 
 **☕ Buy me a Coffee**
 
